@@ -14,7 +14,6 @@ declare class SgxAttestationProvider {
     private readonly TARGET_INFO_PATH;
     private readonly USER_REPORT_DATA_PATH;
     private readonly QUOTE_PATH;
-    constructor();
     generateAttestation(reportData: string): Promise<SgxAttestation>;
     generateQuoteByGramine(rawUserReport: Buffer): Promise<string>;
 }

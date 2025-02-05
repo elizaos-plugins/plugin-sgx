@@ -1,6 +1,6 @@
 // src/providers/sgxAttestationProvider.ts
-import { promises as fs } from "fs";
-import { createHash } from "crypto";
+import { promises as fs } from "node:fs";
+import { createHash } from "node:crypto";
 function calculateSHA256(input) {
   const hash = createHash("sha256");
   hash.update(input);
@@ -13,8 +13,8 @@ var SgxAttestationProvider = class {
   TARGET_INFO_PATH = "/dev/attestation/target_info";
   USER_REPORT_DATA_PATH = "/dev/attestation/user_report_data";
   QUOTE_PATH = "/dev/attestation/quote";
-  constructor() {
-  }
+  // Remove unnecessary constructor
+  // constructor() {}
   async generateAttestation(reportData) {
     const rawUserReport = calculateSHA256(reportData);
     try {
@@ -50,7 +50,7 @@ var SgxAttestationProvider = class {
     if (realLen === -1) {
       throw new Error("quote without EOF");
     }
-    return "0x" + quoteData.subarray(0, realLen + 1).toString("hex");
+    return `0x${quoteData.subarray(0, realLen + 1).toString("hex")}`;
   }
 };
 var sgxAttestationProvider = {
